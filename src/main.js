@@ -5,6 +5,8 @@ import router from './router'
 import ElementUI from 'element-ui'
 // 引入less出去浏览默认样式
 import './style/index.less'
+// 引入elementui样式包
+import 'element-ui/lib/theme-chalk/index.css'
 // 注册了ElementUI全局注册
 Vue.use(ElementUI)
 

@@ -5,20 +5,21 @@ import Login from '../views/login'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+  {
   // 强制跳转
-  path: '/',
-  redirect: '/home'
-},
-{
-  path: '/home',
-  name: 'home',
-  component: Home
-},
-{
-  path: './login',
-  component: Login
-}
+    path: '/',
+    redirect: '/home'
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: Home
+  },
+  {
+    path: '/login',
+    component: Login
+  }
   // {
   //   path: '/about',
   //   name: 'about',
