@@ -67,12 +67,17 @@ export default {
             method: 'post',
             data: this.loginForm
           }).then(result => {
-            console.log(result)
             // 当点击输入用户名和验证码的时候，狗太会给前段用户一个token 在用户登录是需要携带这个token才能跳转，所以需要前段存下这个token
             // 当请求成功的时候就生成一个token然后存储在浏览器用户
             window.localStorage.setItem('user-token', result.data.data.token)
-          }).catch(error => {
-            console.log(error)
+            // 登录验证成功跳转到主页
+            this.$router.push('./home')
+          }).catch(() => {
+            // 这个是element-ui 提供的一个方法，方法$message 相当于给 Vue.portotype上添加了一个$message方法
+            this.$message({
+              message: '您电话号码或者验证码错误',
+              type: 'warning'
+            })
           })
         }
       })
