@@ -55,10 +55,25 @@ export default {
   },
   methods: {
     submitLogin () {
-      this.$refs.myForm.validate(function (isOk) {
+      // 获取整个标签元素，el-form
+      this.$refs.myForm.validate((isOk) => {
         if (isOk) {
           // 前段校验成功，调用接口
-          console.log('前段校验成功，发生用户名和密码后台校验')
+          // 地址参数 查询参数 params 对象
+          // body 参数 data对象
+          // 通过this.$axios（）调用接口请求数据
+          this.$axios({
+            url: '/authorizations',
+            method: 'post',
+            data: this.loginForm
+          }).then(result => {
+            console.log(result)
+            // 当点击输入用户名和验证码的时候，狗太会给前段用户一个token 在用户登录是需要携带这个token才能跳转，所以需要前段存下这个token
+            // 当请求成功的时候就生成一个token然后存储在浏览器用户
+            window.localStorage.setItem('user-token', result.data.data.token)
+          }).catch(error => {
+            console.log(error)
+          })
         }
       })
     }
