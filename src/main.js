@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import './permission'// 引入导航守卫
 // import Element from 'element-ui'
 import ElementUI from 'element-ui'
 // 引入less出去浏览默认样式

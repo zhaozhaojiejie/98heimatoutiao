@@ -2,7 +2,7 @@
 <el-row class='layout-header'  align='middle' type='flex' justify='space-between'>
     <el-col :span='6' class='left'>
         <i class='el-icon-s-fold'></i>
-        <span class='title'>传智播客公司哈哈哈哈哈哈哈</span>
+        <span class='title'>传智播客公司</span>
         </el-col>
     <el-col class='right' :span='4'>
         <el-row type='flex' justify='end' align='middle'>
