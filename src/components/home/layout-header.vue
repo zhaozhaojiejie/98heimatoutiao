@@ -32,14 +32,9 @@ export default {
   // 实例化时就调用
   created () {
     // 获取token 在测试的时候记得一定要从新登陆过
-    let token = window.localStorage.getItem('user-token')
-    this.$axios({
-      url: './user/profile',
-      headers: {
-        // 传入token
-        Authorization: `Bearer ${token}`
 
-      }
+    this.$axios({
+      url: './user/profile'
     }).then(result => {
       console.log(result)
 
