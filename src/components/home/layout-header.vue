@@ -6,9 +6,9 @@
         </el-col>
     <el-col class='right' :span='4'>
         <el-row type='flex' justify='end' align='middle'>
-            <img src="../../assets/img/header.jpg" alt="">
+            <img  :src="userInfo.photo?userInfo.photo:defaultImg" alt="">
             <el-dropdown>
-                <span>朝朝姐姐</span>
+            <span>{{userInfo.name}}</span>
                 <el-dropdown-menu slot='dropdown'>
                     <el-dropdown-item>个人信息</el-dropdown-item>
                     <el-dropdown-item>git地址</el-dropdown-item>
@@ -23,6 +23,30 @@
 
 <script>
 export default {
+  data () {
+    return {
+      userInfo: {},
+      defaultImg: require('../../assets/img/header.jpg')// 图片地址在渲染过程中编译成base64的字符串，这里先存起来
+    }
+  },
+  // 实例化时就调用
+  created () {
+    // 获取token 在测试的时候记得一定要从新登陆过
+    let token = window.localStorage.getItem('user-token')
+    this.$axios({
+      url: './user/profile',
+      headers: {
+        // 传入token
+        Authorization: `Bearer ${token}`
+
+      }
+    }).then(result => {
+      console.log(result)
+
+      this.userInfo = result.data.data
+      console.log(this.userInfo)
+    })
+  }
 
 }
 </script>
