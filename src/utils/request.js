@@ -16,5 +16,12 @@ axios.interceptors.request.use(function (config) {
 
 })
 
+// 相应拦截器
+axios.interceptors.response.use(function (response) {
+  // 这里需要组一个判断，如果有相应就取响应信息的data数据，结构一个response.data.data，否则返回一个空对象，如果一个空对象的话就不会报错，如果没有返回空对象就会报错
+  return response.data ? response.data : {}
+}, function () {
+
+})
 export default axios
 // 在这里直接导出了一个具有新的config文件的axios也就是说在发请求时左右接口都会带token
