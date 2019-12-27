@@ -38,7 +38,7 @@ export default {
     }).then(result => {
       console.log(result)
 
-      this.userInfo = result.data.data
+      this.userInfo = result.data
       console.log(this.userInfo)
     })
   },

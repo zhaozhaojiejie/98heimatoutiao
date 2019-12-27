@@ -44,7 +44,6 @@ export default {
         mobile: [ { required: true, message: ' 请输入手机号 ' }, { pattern: /^1[3456789]\d{9}$/, message: '手机号格式不正确' } ],
         code: [ { required: true, message: '请输入验证码' }, { pattern: /^\d{6}$/, message: '验证码格式不正确' } ],
         check: [ { validator: function (rule, value, callback) {
-          console.log(value)
           if (value) {
             callback()
           } else {
@@ -69,15 +68,9 @@ export default {
           }).then(result => {
             // 当点击输入用户名和验证码的时候，狗太会给前段用户一个token 在用户登录是需要携带这个token才能跳转，所以需要前段存下这个token
             // 当请求成功的时候就生成一个token然后存储在浏览器用户
-            window.localStorage.setItem('user-token', result.data.data.token)
+            window.localStorage.setItem('user-token', result.data.token)
             // 登录验证成功跳转到主页
             this.$router.push('./home')
-          }).catch(() => {
-            // 这个是element-ui 提供的一个方法，方法$message 相当于给 Vue.portotype上添加了一个$message方法
-            this.$message({
-              message: '您电话号码或者验证码错误',
-              type: 'warning'
-            })
           })
         }
       })
