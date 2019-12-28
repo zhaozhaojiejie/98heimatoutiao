@@ -1,6 +1,6 @@
 <template>
 <!-- 用卡片来布局 -->
-<el-card>
+<el-card v-loading='loading'>
     <!-- 使用面包屑组件，首先第一个组件就是一个匿名插槽首页/具名插槽title -->
     <!-- el-card 有两个部分头和body 这个头部是具名插槽，body是匿名插槽 -->
     <!-- 头部 -->
@@ -34,17 +34,20 @@
 export default {
   data () {
     return {
+      loading: false,
       list: []
     }
   },
   methods: {
     // 请求评论数据
     getComment () {
+      this.loading = true
       this.$axios({
         url: '/articles',
         params: { response_type: 'comment' }
 
       }).then(result => {
+        this.loading = false
         this.list = result.data.results
         console.log(this.list)
       })
