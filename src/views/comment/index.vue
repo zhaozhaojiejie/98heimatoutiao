@@ -21,7 +21,7 @@
         <!-- {{obj.row.comment_statuss}} -->
           <!-- 1.操作组件  2.作用域插槽   -->
           <el-button type='text'>修改</el-button>
-          <el-button type='text'>{{obj.row.comment_status ? '关闭评论':'打开评论'}}</el-button>
+          <el-button @click='openOrClose' type='text'>{{obj.row.comment_status ? '关闭评论':'打开评论'}}</el-button>
           </template>
         </el-table-column>
 
@@ -58,6 +58,37 @@ export default {
       // column当前列属性
       // callValue当前单元格的
       return callValue ? '正常' : '关闭'
+    },
+    openOrClose (row) {
+      // console.log(row)拿到一个数组，里边有id等属性
+
+      let mess = row.comment_status ? '关闭' : '打开'
+      // $confirm 点击确定是进入 then  点击取消进入 catch
+      this.$confirm(`您是否确定${mess}评论吗？`).then(() => {
+        // 用户地址接口
+        // 地址参数、query参数、url参数、路由参数=>可以在params中写 也可以直接拼接在url 后面
+        this.$axios({
+          method: 'put',
+          url: '/comments/status',
+          params: {
+            article_id: row.id
+          },
+          data: {
+            allow_comment: !row.comment_status
+          }
+        }).then(result => {
+          // this.$message({
+          //   type: 'success',
+          //   message: '操作成功'
+          // })
+          this.getComment()
+        }).catch(() => {
+          this.$message({
+            type: 'error',
+            message: '操作失败'
+          })
+        })
+      })
     }
 
   },

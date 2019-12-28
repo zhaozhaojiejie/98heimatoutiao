@@ -58,6 +58,8 @@ axios.interceptors.response.use(function (response) {
       break
   }
   Message({ type: 'warning', message })// 状态码提示
+  // 如果想让错误拦截器的内容进入到catch中二部进入then就要return一个new promise
+  return Promise.reject(error)
 })
 export default axios
 // 在这里直接导出了一个具有新的config文件的axios也就是说在发请求时左右接口都会带token
